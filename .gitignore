@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.client-data-*/
+.pytest_cache/
+data/*
+*.sqlite3
+*.log
+benchmark-results/
+benchmark-results.json

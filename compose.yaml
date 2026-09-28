@@ -1,0 +1,163 @@
+services:
+  node-a:
+    build: .
+    command: ["node", "start"]
+    environment:
+      NODE_NAME: node-a
+      NODE_PORT: "7000"
+      ADVERTISED_HOST: 172.30.0.11
+      DATA_DIR: /var/lib/dht
+      DHT_BITS: "32"
+      DHT_REPLICAS: "3"
+    volumes:
+      - node-a-data:/var/lib/dht
+    networks:
+      dht_net:
+        ipv4_address: 172.30.0.11
+    ports:
+      - "7001:7000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 7000), 1).close()"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+      start_period: 2s
+
+  node-b:
+    build: .
+    command: ["node", "start"]
+    environment:
+      NODE_NAME: node-b
+      NODE_PORT: "7000"
+      ADVERTISED_HOST: 172.30.0.12
+      BOOTSTRAP: node-a:7000
+      DATA_DIR: /var/lib/dht
+      DHT_BITS: "32"
+      DHT_REPLICAS: "3"
+    volumes:
+      - node-b-data:/var/lib/dht
+    networks:
+      dht_net:
+        ipv4_address: 172.30.0.12
+    ports:
+      - "7002:7000"
+    depends_on:
+      node-a:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 7000), 1).close()"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+      start_period: 2s
+
+  node-c:
+    build: .
+    command: ["node", "start"]
+    environment:
+      NODE_NAME: node-c
+      NODE_PORT: "7000"
+      ADVERTISED_HOST: 172.30.0.13
+      BOOTSTRAP: node-a:7000
+      DATA_DIR: /var/lib/dht
+      DHT_BITS: "32"
+      DHT_REPLICAS: "3"
+    volumes:
+      - node-c-data:/var/lib/dht
+    networks:
+      dht_net:
+        ipv4_address: 172.30.0.13
+    ports:
+      - "7003:7000"
+    depends_on:
+      node-a:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 7000), 1).close()"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+      start_period: 2s
+
+  node-d:
+    build: .
+    command: ["node", "start"]
+    environment:
+      NODE_NAME: node-d
+      NODE_PORT: "7000"
+      ADVERTISED_HOST: 172.30.0.14
+      BOOTSTRAP: node-a:7000
+      DATA_DIR: /var/lib/dht
+      DHT_BITS: "32"
+      DHT_REPLICAS: "3"
+    volumes:
+      - node-d-data:/var/lib/dht
+    networks:
+      dht_net:
+        ipv4_address: 172.30.0.14
+    ports:
+      - "7004:7000"
+    depends_on:
+      node-a:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 7000), 1).close()"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+      start_period: 2s
+
+  node-e:
+    build: .
+    command: ["node", "start"]
+    environment:
+      NODE_NAME: node-e
+      NODE_PORT: "7000"
+      ADVERTISED_HOST: 172.30.0.15
+      BOOTSTRAP: node-a:7000
+      DATA_DIR: /var/lib/dht
+      DHT_BITS: "32"
+      DHT_REPLICAS: "3"
+    volumes:
+      - node-e-data:/var/lib/dht
+    networks:
+      dht_net:
+        ipv4_address: 172.30.0.15
+    ports:
+      - "7005:7000"
+    depends_on:
+      node-a:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 7000), 1).close()"]
+      interval: 2s
+      timeout: 1s
+      retries: 30
+      start_period: 2s
+
+  client:
+    build: .
+    entrypoint: ["python", "-c"]
+    command: ["import time; time.sleep(1000000000)"]
+    environment:
+      PYTHONPATH: /app/src
+    networks:
+      dht_net:
+        ipv4_address: 172.30.0.20
+    depends_on:
+      node-a:
+        condition: service_healthy
+
+networks:
+  dht_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+
+volumes:
+  node-a-data:
+  node-b-data:
+  node-c-data:
+  node-d-data:
+  node-e-data:
