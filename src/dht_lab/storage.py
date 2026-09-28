@@ -1,3 +1,4 @@
+# Luu tru node, ban ghi registry va tin nhan bang SQLite.
 """Small SQLite persistence layer for node identity, registry and inbox data."""
 
 from __future__ import annotations

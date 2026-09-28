@@ -1,3 +1,4 @@
+# Dong goi DHT node thanh image Python chay trong Docker.
 FROM python:3.11-slim
 
 ENV PYTHONUNBUFFERED=1 \

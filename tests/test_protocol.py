@@ -1,3 +1,4 @@
+# Kiem thu ma hoa, doc khung JSON va xu ly frame loi.
 from __future__ import annotations
 
 import asyncio

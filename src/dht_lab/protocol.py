@@ -1,3 +1,4 @@
+# Ma hoa va doc khung JSON co tien to do dai qua ket noi TCP.
 """Length-prefixed JSON protocol used by all DHT TCP connections."""
 
 from __future__ import annotations

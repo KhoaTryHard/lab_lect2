@@ -1,3 +1,4 @@
+# Kiem thu ket hop node, registry, message va kha nang phuc hoi.
 from __future__ import annotations
 
 import asyncio

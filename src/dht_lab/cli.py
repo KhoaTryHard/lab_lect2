@@ -1,3 +1,4 @@
+# Cung cap lenh chay node, client va cong cu kiem tra DHT.
 """Command-line entry point for nodes, clients and local diagnostics."""
 
 from __future__ import annotations

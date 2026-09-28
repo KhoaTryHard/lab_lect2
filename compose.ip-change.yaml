@@ -1,3 +1,4 @@
+# Cau hinh ghi de de mo phong thay doi dia chi node-c.
 services:
   node-c:
     environment:

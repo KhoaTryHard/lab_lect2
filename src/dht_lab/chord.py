@@ -1,3 +1,4 @@
+# Cac ham tinh ID, successor va bang finger cho vong Chord.
 """Pure Chord identifier and finger-table helpers.
 
 The network-facing node implementation is in :mod:`dht_lab.node`; keeping the

@@ -1,3 +1,4 @@
+# Cho cac seed node san sang va vong DHT on dinh.
 """Wait until all configured seed nodes answer and report a non-trivial ring."""
 
 from __future__ import annotations

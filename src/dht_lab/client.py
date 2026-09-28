@@ -1,3 +1,4 @@
+# Cung cap client ket noi seed node de goi RPC DHT.
 """External client helpers for the Mini-DHT.
 
 The client is deliberately not a Chord participant. It has no listening

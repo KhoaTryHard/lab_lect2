@@ -1,3 +1,4 @@
+# Khoi tao cum DHT nhieu node cung mang Docker.
 services:
   node-a:
     build: .
